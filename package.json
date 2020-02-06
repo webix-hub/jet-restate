@@ -1,0 +1,9 @@
+{
+  "name": "jet-state",
+  "version": "1.0.0",
+  "description": "Reactive state for Webix Jet apps",
+  "main": "index.js",
+  "repository": "git@github.com:webix-hub/jet-state.git",
+  "author": "Maksim Kozhukh <mkozhukh@ya.ru>",
+  "license": "MIT"
+}
