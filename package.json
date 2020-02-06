@@ -1,5 +1,5 @@
 {
-  "name": "jet-state",
+  "name": "jet-restate",
   "version": "1.0.0",
   "description": "Reactive state for Webix Jet apps",
   "main": "index.js",
