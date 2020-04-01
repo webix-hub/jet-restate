@@ -56,13 +56,28 @@ export function createState(data, config) {
 	const out = {};
 
 	const observe = function(mask, handler) {
-		var key = uid();
+		const key = uid();
 		handlers[key] = { mask, handler };
 		if (mask === "*") handler(out, empty, mask);
 		else handler(out[mask], empty, mask);
 
 		return key;
 	};
+
+	const extend = function(data, sconfig){
+		sconfig = sconfig || config;
+		// normal js object
+		for (const key in data) {
+			if (data.hasOwnProperty(key)) {
+				const test = data[key];
+				if (sconfig.nested && typeof test === "object" && test) {
+					out[key] = createState(test, sconfig);
+				} else {
+					reactive(out, test, key, notify);
+				}
+			}
+		}
+	}
 
 	const observeEnd = function(id) {
 		delete handlers[id];
@@ -104,18 +119,6 @@ export function createState(data, config) {
 		}
 	};
 
-	// normal js object
-	for (const key2 in data) {
-		if (data.hasOwnProperty(key2)) {
-			const test = data[key2];
-			if (config.nested && typeof test === "object" && test) {
-				out[key2] = createState(test, config);
-			} else {
-				reactive(out, test, key2, notify);
-			}
-		}
-	}
-
 	Object.defineProperty(out, "$changes", {
 		value: {
 			attachEvent: observe,
@@ -134,7 +137,13 @@ export function createState(data, config) {
 		enumerable: false,
 		configurable: false,
 	});
+	Object.defineProperty(out, "$extend", {
+		value: extend,
+		enumerable: false,
+		configurable: false,
+	});
 
+	out.$extend(data, config);
 	return out;
 }
 

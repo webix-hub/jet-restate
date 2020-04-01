@@ -1,9 +1,17 @@
 {
   "name": "jet-restate",
+  "type": "module",
   "version": "1.0.1",
   "description": "Reactive state for Webix Jet apps",
   "main": "index.js",
   "repository": "git@github.com:webix-hub/jet-restate.git",
   "author": "Maksim Kozhukh <mkozhukh@ya.ru>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^7.1.1"
+  },
+  "scripts": {
+    "test": "mocha"
+  }
 }

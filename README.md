@@ -39,3 +39,12 @@ now in any of child views
     });
 ```
 
+#### Extending state
+
+It possible to add new vars to the state.
+There is no way to remove them though.
+
+```js
+const state = createState({ mode:"grid" });
+state.$extend({ path:"/" })
+```
